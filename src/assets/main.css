@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+    --color-primary: var(--color-black); /* #000 */
+    --color-primary-dark: var(--color-white); /* #fff */
+    --color-on-surface-dark: oklch(70.7% .022 261.325);
+    --color-on-surface-dark-strong: #fff;
+    --color-outline-dark: oklab(100% 0 5.96046e-8 / .1);
+    --color-surface-dark-alt: oklab(27.8% -.00750866 -.0321344 / .5);
+    --color-surface-dark: oklab(27.8% -.00750866 -.0321344 / .5);
+
+    /* Shared Colors */
+    --color-success: var(--color-green-500);
+    --color-danger: var(--color-red-500);
+
+    /* Border Radius */
+    --radius-radius: var(--radius-lg);
+}

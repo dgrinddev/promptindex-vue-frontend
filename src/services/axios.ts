@@ -1,0 +1,61 @@
+import axios from 'axios'
+import { useAuthStore } from '@/stores/authStore'
+import { router } from '@/router'
+import { useToast } from 'vue-toast-notification'
+import { API_BASE_URL } from '@/config/env'
+
+const $toast = useToast()
+
+const axiosInstance = axios.create({
+	baseURL: API_BASE_URL,
+	// bruges hvis session-based authentication
+	withCredentials: true,
+	withXSRFToken: true,
+})
+
+// bruges hvis API token based authentication
+// axiosInstance.interceptors.request.use(config => {
+// 	config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+// })
+
+axiosInstance.interceptors.response.use(
+	(response) => {
+		return response
+	},
+	async (error) => {
+		const authStore = useAuthStore()
+
+		if (axios.isAxiosError(error)) {
+			if (error.response) {
+				switch (error.response.status) {
+					case 401:
+					case 403:
+					case 419:
+						authStore.clearAuthState()
+						$toast.error('Unauthorized')
+						router.push({ name: 'auth.login' })
+						break
+					case 404:
+						$toast.error('Resource not found')
+						router.push({ name: 'errors.not-found' })
+						break
+					case 500:
+						$toast.error('Internal Server Error')
+						router.push({ name: 'errors.internal-server-error' })
+						break
+				}
+			} else {
+				// Netværksfejl / timeout
+				$toast.error('Network error — please try again')
+			}
+		} else {
+			// Ikke Axios-fejl
+			console.error('HTTP / transport error:', error)
+			$toast.error('Something went wrong while connecting. Please try again.')
+		}
+
+		return Promise.reject(error)
+	}
+)
+
+export default axiosInstance
