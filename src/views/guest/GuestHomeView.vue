@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="text-center">
-        <h1 class="text-5xl font-semibold tracking-tight text-balance text-white sm:text-7xl">Where great AI prompts are shared.</h1>
+        <h1 class="text-5xl font-semibold tracking-tight text-balance text-white sm:text-7xl">Where great AI prompts are shared</h1>
         <!--
         <p class="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat.</p>
         -->
