@@ -110,12 +110,19 @@
 	<div v-if="getPromptForEdit_isLoading">
 		<p class="mt-1 text-base text-gray-400">Loading...</p>
 	</div>
-  <form v-else @submit.prevent="savePrompt(form, prompt_id)">
-    <div class="space-y-12">
-      <div class="border-b border-white/10 pb-12">
-        <h2 class="mt-1 text-base text-gray-400">Fill out the fields below to {{ prompt_id ? 'edit' : 'create' }} your prompt</h2>
+	<form v-else @submit.prevent="savePrompt(form, prompt_id)">
+		<div class="space-y-12">
+			<div class="border-b border-white/10 pb-12">
+				<h2 class="mt-1 text-base text-gray-400">
+					<span v-if="prompt_id">Edit your prompt below.</span>
+					<span v-else>
+						<span>Create your prompt below.</span>
+						<br>
+						<span><span class="font-bold text-white">IMPORTANT:</span> It will be published instantly and <span class="font-bold text-white">visible to everyone</span>.</span>
+					</span>
+				</h2>
 
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+				<div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 					<StringInput
 						id="title"
 						name="title"
@@ -183,11 +190,11 @@
 						root-class="col-span-full"
 						gallery-group-label="Choose cover image"
 					/>
-        </div>
-      </div>
-    </div>
+				</div>
+			</div>
+		</div>
 
-    <div class="mt-6 flex items-center justify-end gap-x-6">
+		<div class="mt-6 flex items-center justify-end gap-x-6">
 			<!--
 				<button type="button" class="text-sm/6 font-semibold text-white">Cancel</button>
 			-->
@@ -198,6 +205,6 @@
 			>
 				{{ submitBtn }}
 			</button>
-    </div>
-  </form>
+		</div>
+	</form>
 </template>

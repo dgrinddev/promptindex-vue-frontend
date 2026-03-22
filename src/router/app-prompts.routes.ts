@@ -32,7 +32,7 @@ export const appPromptsRoutes: RouteRecordRaw[] = [
 		name: 'app.prompts.create',
 		component: PromptFormView,
 		props: {
-			submitBtn: 'Create',
+			submitBtn: 'Create & Publish',
 		},
 		meta: {
 			// Navigation (used by useGetNavItemsFromRoutes composable)

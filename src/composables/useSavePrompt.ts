@@ -22,7 +22,7 @@ export function useSavePrompt() {
 				await axiosInstance.post<ApiActionResponse>('/api/app/prompts', payload)
 			}
 			errorsStore.clear()
-			$toast.success(`Prompt ${promptId ? 'updated' : 'created'}!`)
+			$toast.success(`Prompt ${promptId ? 'updated' : 'created and published'}!`)
 			router.push({ name: 'app.prompts.index' })
 		} catch (e) {
 			// Handle Laravel validation errors (HTTP 422)
