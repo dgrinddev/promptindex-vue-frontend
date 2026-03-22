@@ -16,7 +16,7 @@ const guestParentRoutes: RouteRecordRaw[] = [
     children: [
       ...guestLandingPagesRoutes,
 
-      // Prompts sub-domain (nested under /prompts)
+      // Prompts (nested under `/prompts`)
       {
         path: 'prompts',
         children: guestPublicPromptsRoutes,
@@ -74,7 +74,7 @@ const appParentRoutes: RouteRecordRaw[] = [
       // Core app routes
       ...appRoutes,
 
-      // Prompts sub-domain (nested under /app/prompts)
+      // Prompts (nested under `/app/prompts`)
       {
         path: 'prompts',
         children: appPromptsRoutes,
@@ -126,5 +126,5 @@ router.beforeEach((to) => {
       name: 'app.prompts.index',
     }
   }
-  return true // i alle andre tilfælde: tillad navigation
+  return true // in all other cases: allow navigation
 })

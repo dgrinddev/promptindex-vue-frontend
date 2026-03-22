@@ -8,12 +8,12 @@ const $toast = useToast()
 
 const axiosInstance = axios.create({
 	baseURL: API_BASE_URL,
-	// bruges hvis session-based authentication
+	// used for session-based authentication
 	withCredentials: true,
 	withXSRFToken: true,
 })
 
-// bruges hvis API token based authentication
+// used if API token based authentication is used
 // axiosInstance.interceptors.request.use(config => {
 // 	config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
 // })
@@ -45,11 +45,11 @@ axiosInstance.interceptors.response.use(
 						break
 				}
 			} else {
-				// Netværksfejl / timeout
+				// Network error / timeout
 				$toast.error('Network error — please try again')
 			}
 		} else {
-			// Ikke Axios-fejl
+			// Not an Axios error
 			console.error('HTTP / transport error:', error)
 			$toast.error('Something went wrong while connecting. Please try again.')
 		}
