@@ -129,7 +129,7 @@
 					>
 						<PromptIndexCopyButton
 							:prompt-content="prompt.content"
-							class="inline-flex items-center rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20 cursor-default! mt-3"
+							class="inline-flex items-center rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20 cursor-default! max-sm:mt-3"
 						/>
 					</span>
 		
