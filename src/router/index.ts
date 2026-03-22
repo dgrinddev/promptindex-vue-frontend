@@ -28,6 +28,7 @@ const guestParentRoutes: RouteRecordRaw[] = [
 // =================================================================
 // Guest-docs
 // =================================================================
+/*
 import GuestDocsLayout from '@/layouts/GuestDocsLayout.vue'
 import { guestDocsRoutes } from '@/router/guest-docs.routes'
 
@@ -38,6 +39,7 @@ const guestDocsParentRoutes: RouteRecordRaw[] = [
     children: guestDocsRoutes,
   },
 ]
+*/
 
 // =================================================================
 // Auth
@@ -102,7 +104,7 @@ const errorsParentRoutes: RouteRecordRaw[] = [
 
 const routes: RouteRecordRaw[] = [
   ...guestParentRoutes,
-  ...guestDocsParentRoutes,
+  //...guestDocsParentRoutes,
   ...authParentRoutes,
   ...appParentRoutes,
   ...errorsParentRoutes,

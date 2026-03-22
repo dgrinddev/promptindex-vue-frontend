@@ -2,5 +2,5 @@
 </script>
 
 <template>
-	<p class="text-white">dette er docs getting started view (GettingStartedView)</p>
+	<p class="text-white">this is docs getting started view (GettingStartedView)</p>
 </template>

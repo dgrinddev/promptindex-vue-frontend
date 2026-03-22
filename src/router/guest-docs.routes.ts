@@ -8,7 +8,6 @@ export const guestDocsRoutes: RouteRecordRaw[] = [
 		path: '',
 		name: 'guest.docs.home',
 		component: GuestDocsHomeView,
-		/*
 		meta: {
 			// Navigation (used by useGetNavItemsFromRoutes composable)
 			navLabel: 'Docs',
@@ -16,7 +15,6 @@ export const guestDocsRoutes: RouteRecordRaw[] = [
 				'GuestLayout:header:2-mainNav.1-publicPages': 4
 			},
 		},
-		*/
 	},
 	{
 		path: 'getting-started',

@@ -2,5 +2,5 @@
 </script>
 
 <template>
-	<p class="text-white">dette er docs auth view (AuthenticationView)</p>
+	<p class="text-white">this is docs auth view (AuthenticationView)</p>
 </template>
