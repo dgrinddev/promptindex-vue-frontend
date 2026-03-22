@@ -20,7 +20,7 @@ export function useDeleteUser() {
 				console.warn(`useDeleteUser: unexpected success status code`, response.status)
 			}
 			errorsStore.clear()
-			$toast.success('User deleted successfully')
+			$toast.success('User deleted!')
 			router.push({ name: 'guest.guest-pages.home' })
 		} catch (e) {
 			// Handle Laravel validation errors (HTTP 422)

@@ -19,7 +19,7 @@ export function useSaveProfile() {
 		try {
 			await axiosInstance.put<void>(`/api/user/profile-information`, payload)
 			errorsStore.clear()
-			$toast.success(`You succesfully updated your profile`)
+			$toast.success(`Profile updated!`)
 			authStore.getAuthUser()
 			router.push({ name: 'app.prompts.index' })
 		} catch (e) {
