@@ -21,8 +21,12 @@
 
 	const route = useRoute()
 	const $toast = useToast()
-	const { deleteResource: deletePrompt } = useDeleteResource('prompt')
 	const { paginatedResponse, prompts, getAllPrompts } = useGetAllPrompts()
+
+	const {
+		deleteResource_isLoading: deletePrompt_isLoading,
+		deleteResource: deletePrompt,
+	} = useDeleteResource('prompt')
 
 	const props = defineProps<{
 		context: PromptIndexContext
@@ -146,6 +150,7 @@
 											type="button"
 											aria-label="Edit prompt"
 											:class="actionButtonsClasses"
+											:disabled="deletePrompt_isLoading"
 										>
 											<PencilIconSolid class="size-5" />
 										</button>
@@ -156,6 +161,7 @@
 										type="button"
 										aria-label="Delete prompt"
 										:class="actionButtonsClasses"
+										:disabled="deletePrompt_isLoading"
 									>
 										<TrashIconSolid class="size-5" />
 									</button>
