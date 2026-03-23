@@ -17,6 +17,7 @@
 		showActionButton?: boolean
 		enableRadio?: boolean
 		noImagesMessage?: string
+		isProcessing?: boolean
 	}>()
 
 	defineOptions({
@@ -66,9 +67,12 @@
 					<ActionButton
 						v-if="showActionButton"
 						:icon="XCircleIconSolid"
-						class="hover:bg-red-600/70"
+						:class="{
+							'hover:bg-red-600/70': !isProcessing,
+						}"
 						icon-class="size-6"
 						aria-label="Slet billede"
+						:disabled="isProcessing"
 						@click="emit('remove-image', image.id)"
 					/>
 
@@ -83,8 +87,13 @@
 					<label
 						v-if="enableRadio"
 						:for="`${name}-${String(image.id)}`"
-						class="relative block cursor-pointer rounded-lg overflow-hidden border transition hover:ring-2 hover:ring-indigo-400 has-checked:ring-2 has-checked:ring-indigo-500"
-						:class="labelClass"
+						class="relative block rounded-lg overflow-hidden border transition has-checked:ring-2 has-checked:ring-indigo-500"
+						:class="[
+							labelClass,
+							isProcessing
+								? 'cursor-not-allowed'
+								: 'cursor-pointer hover:ring-2 hover:ring-indigo-400',
+						]"
 					>
 						<!-- Fallback: group name only on FIRST radio -->
 						<span v-if="index === 0 && groupLabel" class="sr-only">
@@ -97,6 +106,7 @@
 							:value="image.id"
 							class="sr-only peer"
 							v-model="coverImageId"
+							:disabled="isProcessing"
 							v-bind="$attrs"
 						/>
 						<img
@@ -112,7 +122,8 @@
 								rounded-md px-3 py-1 text-sm font-medium transition"
 							:class="{
 								'bg-indigo-600 text-white': coverImageId === image.id,
-								'bg-black/60 text-white group-hover:bg-black/80': coverImageId !== image.id,
+								'bg-black/60 text-white': coverImageId !== image.id,
+								'group-hover:bg-black/80': coverImageId !== image.id && !isProcessing,
 							}"
 						>
 							<CheckIconSolid

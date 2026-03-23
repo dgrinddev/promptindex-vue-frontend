@@ -5,10 +5,12 @@ import { router } from '@/router'
 import type { DeleteAccountPayload } from '@/types/settings.types'
 import { handleLaravelValidationError } from '@/services/handleLaravelValidationError'
 import { useErrorsStore } from '@/stores/errorsStore'
+import { useAuthStore } from '@/stores/authStore'
 
 export function useDeleteUser() {
 	const $toast = useToast()
 	const errorsStore = useErrorsStore()
+	const authStore = useAuthStore()
 	
 	const deleteUser_isLoading = ref<boolean>(false)
 
@@ -20,6 +22,7 @@ export function useDeleteUser() {
 				console.warn(`useDeleteUser: unexpected success status code`, response.status)
 			}
 			errorsStore.clear()
+			authStore.clearAuthState()
 			$toast.success('User deleted!')
 			router.push({ name: 'guest.guest-pages.home' })
 		} catch (e) {

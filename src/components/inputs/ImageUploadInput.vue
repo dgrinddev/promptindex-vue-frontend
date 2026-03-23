@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	import { ref, useTemplateRef } from 'vue'
+	import { ref, useTemplateRef, watch } from 'vue'
 	import ImageUploadGallery from '@/components/inputs/ImageUploadGallery.vue'
 	import { useDeleteResource } from '@/composables/useDeleteResource'
 	import { useToast } from 'vue-toast-notification'
@@ -70,7 +70,15 @@
 		throw new Error('ImageUploadInput: v-model:coverImageId is required when enableRadio is used.')
 	}
 
-	const { deleteResource: deleteImage } = useDeleteResource('image')
+	const {
+		deleteResource_isLoading: deleteImage_isLoading,
+		deleteResource: deleteImage,
+	} = useDeleteResource('image')
+
+	watch(deleteImage_isLoading, () => {
+		syncProcessingState()
+	})
+
 	const $toast = useToast()
 	const serverMessage = ref<string | null>(null)
 	const FilePond = vueFilePond( // Create FilePond component
@@ -218,16 +226,18 @@
 	}
 
 
-	// Determines if FilePond is currently processing any files and updates `isProcessing`.
+	// Determines if images are currently being processed (upload or delete) and updates `isProcessing` accordingly.
 	function syncProcessingState(): void {
 		const files = pond.value?.getFiles() ?? []
 
-		isProcessing.value = files.some(file =>
+		const isUploading = files.some(file =>
 			file.status === FileStatus.INIT
 			|| file.status === FileStatus.PROCESSING_QUEUED
 			|| file.status === FileStatus.PROCESSING
 			|| file.status === FileStatus.LOADING
 		)
+
+		isProcessing.value = isUploading || deleteImage_isLoading.value
 	}
 
 
@@ -287,6 +297,7 @@
 				:name="name"
 				:id="id"
 				ref="pond"
+				:disabled="deleteImage_isLoading"
 				label-idle="Upload a image or drag and drop"
 				allow-multiple="true"
 				accepted-file-types="image/jpg, image/jpeg, image/png"
@@ -324,6 +335,7 @@
 				v-model="coverImageId"
 				:show-action-button="showActionButton"
 				:enable-radio="enableRadio"
+				:is-processing="isProcessing"
 				@remove-image="handleRemoveImage($event)"
 				root-class="mt-5"
 				:no-images-message="noImagesMessage"

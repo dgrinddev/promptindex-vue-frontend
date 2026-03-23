@@ -103,7 +103,7 @@
 		]
 	})
 
-	const isUploadingImages = ref(false)
+	const isProcessingImages = ref(false)
 </script>
 
 <template>
@@ -183,7 +183,7 @@
 						label="Upload images"
 						v-model:images="images"
 						v-model:coverImageId="form.coverimage_id"
-						v-model:isProcessing="isUploadingImages"
+						v-model:isProcessing="isProcessingImages"
 						:prompt-id="prompt_id"
 						:upload-image-token="form.upload_image_token"
 						enable-radio
@@ -200,7 +200,7 @@
 			-->
 			<button
 				type="submit"
-				:disabled="isUploadingImages || savePrompt_isLoading"
+				:disabled="isProcessingImages || savePrompt_isLoading"
 				class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
 			>
 				{{ submitBtn }}
