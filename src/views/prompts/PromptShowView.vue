@@ -20,8 +20,12 @@
 
 	const route = useRoute()
 	const $toast = useToast()
-	const { deleteResource: deletePrompt } = useDeleteResource('prompt')
 	const { getPrompt_isLoading, prompt, getPrompt } = useGetPrompt()
+
+	const {
+		deleteResource_isLoading: deletePrompt_isLoading,
+		deleteResource: deletePrompt,
+	} = useDeleteResource('prompt')
 
 	const props = defineProps<{
 		context: PromptShowContext
@@ -139,8 +143,15 @@
 					<span v-if="props.context === 'app'" class="ml-3 block">
 						<RouterLink
 							:to="{ name: 'app.prompts.edit', params: { prompt: prompt.id } }"
+							:class="{
+								'pointer-events-none': deletePrompt_isLoading
+							}"
 						>
-							<button type="button" class="inline-flex items-center rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20">
+							<button
+								type="button"
+								class="inline-flex items-center rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
+								:disabled="deletePrompt_isLoading"
+							>
 								<PencilIconSolid class="mr-1.5 -ml-0.5 size-5 text-white" aria-hidden="true" />
 								Edit
 							</button>
@@ -150,8 +161,9 @@
 					<span v-if="props.context === 'app'" class="ml-3">
 						<button
 							type="button"
-							class="inline-flex items-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white hover:bg-red-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+							class="inline-flex items-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white hover:bg-red-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 disabled:bg-red-400"
 							@click="handleRemovePrompt(prompt.id)"
+							:disabled="deletePrompt_isLoading"
 						>
 							<TrashIconSolid class="mr-1.5 -ml-0.5 size-5" aria-hidden="true" />
 							Delete
