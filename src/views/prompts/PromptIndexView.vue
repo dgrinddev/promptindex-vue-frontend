@@ -189,6 +189,9 @@
 									params: { prompt: prompt.id }
 								}"
 								class="w-fit font-medium text-primary underline-offset-2 hover:underline focus:underline focus:outline-hidden dark:text-primary-dark"
+								:class="{
+									'pointer-events-none': deletePrompt_isLoading
+								}"
 							>
 								<span>Read full prompt</span>
 								<ArrowRightIconSolid aria-hidden="true" class="inline size-4" />
