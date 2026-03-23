@@ -71,7 +71,7 @@
 							'hover:bg-red-600/70': !isProcessing,
 						}"
 						icon-class="size-6"
-						aria-label="Slet billede"
+						aria-label="Delete image"
 						:disabled="isProcessing"
 						@click="emit('remove-image', image.id)"
 					/>
