@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import axiosInstance from '@/services/axios'
-import { useToast } from 'vue-toast-notification'
+import { toast } from '@/services/toast'
 import { router } from '@/router'
 import type { DeleteAccountPayload } from '@/types/settings.types'
 import { handleLaravelValidationError } from '@/services/handleLaravelValidationError'
@@ -8,7 +8,6 @@ import { useErrorsStore } from '@/stores/errorsStore'
 import { useAuthStore } from '@/stores/authStore'
 
 export function useDeleteUser() {
-	const $toast = useToast()
 	const errorsStore = useErrorsStore()
 	const authStore = useAuthStore()
 	
@@ -23,14 +22,14 @@ export function useDeleteUser() {
 			}
 			errorsStore.clear()
 			authStore.clearAuthState()
-			$toast.success('User deleted!')
+			toast.success('User deleted!')
 			router.push({ name: 'guest.guest-pages.home' })
 		} catch (e) {
 			// Handle Laravel validation errors (HTTP 422)
 			if (handleLaravelValidationError(e)) return
 			// If unexpected API response:
 			console.error('Unexpected API response for deleteUser:', e)
-			$toast.error('Failed to delete the user. Please reload the page.')
+			toast.error('Failed to delete the user. Please reload the page.')
 		} finally {
 			deleteUser_isLoading.value = false
 		}
