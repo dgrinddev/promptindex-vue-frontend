@@ -94,7 +94,7 @@
 
     <PrimaryButton
       type="submit"
-      class="w-full disabled:bg-indigo-400"
+      class="w-full"
       id="submit_btn"
       :disabled="authStore.register_isLoading"
     >

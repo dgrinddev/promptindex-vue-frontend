@@ -210,7 +210,7 @@
                     <li>
                       <MenuItem v-slot="{ active }">
                         <button
-                          class="w-full text-start cursor-pointer block px-3 py-1 text-sm/6 text-white"
+                          class="w-full text-start cursor-pointer block px-3 py-1 text-sm/6 text-white disabled:cursor-default"
                           :class="{ 'bg-gray-700': active }"
                           @click="authStore.logout()"
                           :disabled="authStore.logout_isLoading"
