@@ -12,5 +12,7 @@ const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 app.use(pinia)
 app.use(router)
-app.use(ToastPlugin)
+app.use(ToastPlugin, {
+	position: 'top-right',
+})
 app.mount('#app')
