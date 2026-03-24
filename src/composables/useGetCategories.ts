@@ -1,12 +1,10 @@
-import { useToast } from 'vue-toast-notification'
+import { toast } from '@/services/toast'
 import { ref } from 'vue'
 import axiosInstance from '@/services/axios'
 import type { Category } from '@/types/prompts/category.types'
 import type { LaravelResourceResponse } from '@/types/api/responses.types'
 
 export function useGetCategories() {
-	const $toast = useToast()
-
 	const getCategories_isLoading = ref<boolean>(false)
 	const categories = ref<Category[]>([])
 
@@ -22,7 +20,7 @@ export function useGetCategories() {
 			categories.value = responseData
 		} catch (e) {
 			console.error('Failed to fetch categories in getCategories:', e)
-			$toast.error('Something went wrong. Please reload the page.')
+			toast.error('Something went wrong. Please reload the page.')
 		} finally {
 			getCategories_isLoading.value = false
 		}

@@ -1,4 +1,4 @@
-import { useToast } from 'vue-toast-notification'
+import { toast } from '@/services/toast'
 import { useErrorsStore } from '@/stores/errorsStore'
 import { ref } from 'vue'
 import axiosInstance from '@/services/axios'
@@ -8,7 +8,6 @@ import type { PromptPayload } from '@/types/prompts/prompt.types'
 import type { ApiActionResponse } from '@/types/api/responses.types'
 
 export function useSavePrompt() {
-	const $toast = useToast()
 	const errorsStore = useErrorsStore()
 	
 	const savePrompt_isLoading = ref<boolean>(false)
@@ -22,14 +21,14 @@ export function useSavePrompt() {
 				await axiosInstance.post<ApiActionResponse>('/api/app/prompts', payload)
 			}
 			errorsStore.clear()
-			$toast.success(`Prompt ${promptId ? 'updated' : 'created and published'}!`)
+			toast.success(`Prompt ${promptId ? 'updated' : 'created and published'}!`)
 			router.push({ name: 'app.prompts.index' })
 		} catch (e) {
 			// Handle Laravel validation errors (HTTP 422)
 			if (handleLaravelValidationError(e)) return
 			// If unexpected API response:
 			console.error('Unexpected API response for savePrompt:', e)
-			$toast.error('Something went wrong. Please try again.')
+			toast.error('Something went wrong. Please try again.')
 		} finally {
 			savePrompt_isLoading.value = false
 		}

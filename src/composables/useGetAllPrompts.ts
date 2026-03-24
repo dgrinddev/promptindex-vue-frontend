@@ -1,4 +1,4 @@
-import { useToast } from 'vue-toast-notification'
+import { toast } from '@/services/toast'
 import { computed, ref } from 'vue'
 import axiosInstance from '@/services/axios'
 import type { GetPrompt, PromptIndexContext } from '@/types/prompts/prompt.types'
@@ -10,8 +10,6 @@ const paths: Record<PromptIndexContext, string> = {
 }
 
 export function useGetAllPrompts() {
-	const $toast = useToast()
-
 	const getAllPrompts_isLoading = ref<boolean>(false)
 	const paginatedResponse = ref<LaravelPaginatedResponse<GetPrompt> | null>(null)
 	const prompts = computed<GetPrompt[]>(() => paginatedResponse.value?.data ?? [])
@@ -34,7 +32,7 @@ export function useGetAllPrompts() {
 			paginatedResponse.value = data
 		} catch (e) {
 			console.error(`Failed to fetch ${context} prompts in getAllPrompts:`, e)
-			$toast.error('Something went wrong. Please reload the page.')
+			toast.error('Something went wrong. Please reload the page.')
 		} finally {
 			getAllPrompts_isLoading.value = false
 		}
