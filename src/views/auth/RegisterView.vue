@@ -94,8 +94,9 @@
 
     <PrimaryButton
       type="submit"
-      class="w-full"
+      class="w-full disabled:bg-indigo-400"
       id="submit_btn"
+      :disabled="authStore.register_isLoading"
     >
       Create account
     </PrimaryButton>

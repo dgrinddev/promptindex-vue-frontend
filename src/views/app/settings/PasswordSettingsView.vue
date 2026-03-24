@@ -7,7 +7,7 @@
 	import { onMounted, ref } from 'vue'
 
 	const errorsStore = useErrorsStore()
-	const { savePassword } = useSavePassword()
+	const { savePassword_isLoading, savePassword } = useSavePassword()
 
 	const form = ref<PasswordSettings>({
 		current_password: '',
@@ -57,6 +57,7 @@
 			type="submit"
 			class="w-full"
 			id="submit_btn"
+			:disabled="savePassword_isLoading"
 		>
 			Save
 		</PrimaryButton>

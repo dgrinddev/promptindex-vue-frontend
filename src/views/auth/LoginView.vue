@@ -43,8 +43,9 @@
 
     <PrimaryButton
       type="submit"
-      class="w-full"
+      class="w-full disabled:bg-indigo-400"
       id="submit_btn"
+      :disabled="authStore.login_isLoading"
     >
       Sign in
     </PrimaryButton>

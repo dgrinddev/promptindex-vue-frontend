@@ -17,7 +17,10 @@ export const useAuthStore = defineStore('auth', () => {
     const user = ref<AuthUser | null>(null)
     const isLoggedIn = computed(() => user.value !== null)
 
+    const register_isLoading = ref<boolean>(false)
+
     async function register(payload: RegisterPayload): Promise<void> {
+      register_isLoading.value = true
       await axiosInstance.get<void>('/sanctum/csrf-cookie')
       try {
         await axiosInstance.post<ApiActionResponse>('/api/register', payload)
@@ -30,10 +33,15 @@ export const useAuthStore = defineStore('auth', () => {
         // If unexpected API response:
         console.error('Unexpected API response for register:', e)
         $toast.error('Something went wrong. Please try again.')
+      } finally {
+        register_isLoading.value = false
       }
     }
 
+    const login_isLoading = ref<boolean>(false)
+
     async function login(payload: LoginPayload): Promise<void> {
+      login_isLoading.value = true
       await axiosInstance.get<void>('/sanctum/csrf-cookie')
       try {
         await axiosInstance.post<AuthLoginResponse>('/api/login', payload)
@@ -68,14 +76,19 @@ export const useAuthStore = defineStore('auth', () => {
         // If unexpected API response:
         console.error('Unexpected API response for login:', e)
         $toast.error('Something went wrong. Please try again.')
+      } finally {
+        login_isLoading.value = false
       }
     }
+
+    const logout_isLoading = ref<boolean>(false)
 
     async function logout(options?: {
       redirectTo?: RouteLocationRaw | null
       toastMessage?: string | null
       toastType?: 'success' | 'info' | 'error'
     }): Promise<void> {
+      logout_isLoading.value = true
       try {
         await axiosInstance.post<void>('/api/logout')
       } catch (e) {
@@ -91,6 +104,7 @@ export const useAuthStore = defineStore('auth', () => {
         }
         if (options?.redirectTo === null) return
         await router.push(options?.redirectTo ?? { name: 'guest.guest-pages.home' })
+        logout_isLoading.value = false
       }
     }
 
@@ -98,7 +112,10 @@ export const useAuthStore = defineStore('auth', () => {
       user.value = null
     }
 
+    const getAuthUser_isLoading = ref<boolean>(false)
+
     async function getAuthUser(): Promise<void> {
+      getAuthUser_isLoading.value = true
       try {
         const response = await axiosInstance.get<LaravelResourceResponse<AuthUser>>('/api/user')
         const responseData = response.data?.data
@@ -110,10 +127,24 @@ export const useAuthStore = defineStore('auth', () => {
       } catch (e) {
         console.error('Failed to fetch authenticated user:', e)
         clearAuthState()
+      } finally {
+        getAuthUser_isLoading.value = false
       }
     }
 
-    return { user, isLoggedIn, register, login, logout, clearAuthState, getAuthUser }
+    return {
+      user,
+      isLoggedIn,
+      register_isLoading,
+      register,
+      login_isLoading,
+      login,
+      logout_isLoading,
+      logout,
+      clearAuthState,
+      getAuthUser_isLoading,
+      getAuthUser
+    }
   },
   {
     persist: {

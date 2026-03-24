@@ -9,7 +9,7 @@
 
 	const errorsStore = useErrorsStore()
 	const { getProfileForEdit_isLoading, profile, getProfileForEdit } = useGetProfileForEdit()
-	const { saveProfile } = useSaveProfile()
+	const { saveProfile_isLoading, saveProfile } = useSaveProfile()
 
 	const form = ref<ProfileSettings>({
 		name: '',
@@ -61,6 +61,7 @@
 			type="submit"
 			class="w-full"
 			id="submit_btn"
+			:disabled="saveProfile_isLoading"
 		>
 			Save
 		</PrimaryButton>

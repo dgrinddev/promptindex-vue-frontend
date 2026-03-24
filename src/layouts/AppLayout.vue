@@ -213,6 +213,7 @@
                           class="w-full text-start cursor-pointer block px-3 py-1 text-sm/6 text-white"
                           :class="{ 'bg-gray-700': active }"
                           @click="authStore.logout()"
+                          :disabled="authStore.logout_isLoading"
                         >
                           Sign out
                         </button>
