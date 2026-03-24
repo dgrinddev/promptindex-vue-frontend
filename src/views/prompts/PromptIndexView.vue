@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	import { computed, inject, watch, type Component } from 'vue'
+	import { computed, inject, watch, ref, type Component } from 'vue'
 	import { useRoute } from 'vue-router'
 	import { useToast } from 'vue-toast-notification'
 	import { router } from '@/router'
@@ -21,7 +21,7 @@
 
 	const route = useRoute()
 	const $toast = useToast()
-	const { paginatedResponse, prompts, getAllPrompts } = useGetAllPrompts()
+	const { getAllPrompts_isLoading, paginatedResponse, prompts, getAllPrompts } = useGetAllPrompts()
 
 	const {
 		deleteResource_isLoading: deletePrompt_isLoading,
@@ -96,10 +96,25 @@
 	}
 
 	const actionButtonsClasses = 'inline-flex items-center justify-center aspect-square whitespace-nowrap rounded-radius bg-on-surface-alt border border-on-surface-alt p-1 text-xs font-medium tracking-wide text-on-on-surface-strong transition hover:opacity-75 text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed dark:bg-on-surface-dark-alt dark:border-on-surface-dark-alt dark:text-on-on-surface-dark-strong dark:focus-visible:outline-primary-dark cursor-pointer hover:!bg-on-primary dark:hover:!bg-surface-dark-alt border-none text-on-surface-strong/60 hover:text-on-surface-strong dark:text-on-surface-dark-strong/60 dark:hover:text-on-surface-dark-strong'
+
+	const copiedPromptIds = ref(new Set<number>())
+
+	function handleCopiedStateChange(promptId: number, isCopied: boolean): void {
+		const newCopiedPromptIds = new Set(copiedPromptIds.value)
+		if (isCopied) {
+			newCopiedPromptIds.add(promptId)
+		} else {
+			newCopiedPromptIds.delete(promptId)
+		}
+		copiedPromptIds.value = newCopiedPromptIds
+	}
 </script>
 
 <template>
-	<template v-if="promptsView.length">
+	<template v-if="getAllPrompts_isLoading">
+		<p class="mt-1 text-base text-gray-400">Loading...</p>
+	</template>
+	<template v-else-if="promptsView.length">
 		<div
 			class="w-full max-w-5xl gap-2 md:gap-3 xl:gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 mb-6"
 			:class="{
@@ -137,10 +152,17 @@
 										{{ prompt.title }}
 									</h3>
 								</div>
-								<div class="flex pointer-fine:hidden group-hover:flex items-center gap-2">
+								<div
+									class="items-center gap-2"
+									:class="{
+										'pointer-coarse:flex pointer-fine:hidden pointer-fine:group-hover:flex': !copiedPromptIds.has(prompt.id),
+										'flex': copiedPromptIds.has(prompt.id)
+									}"
+								>
 									<PromptIndexCopyButton
 										:prompt-content="prompt.content"
 										:class="actionButtonsClasses"
+										@copied-state-change="handleCopiedStateChange(prompt.id, $event)"
 									/>
 									<RouterLink
 										v-if="props.context === 'app'"

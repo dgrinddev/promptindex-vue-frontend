@@ -1,10 +1,14 @@
 <script setup lang="ts">
 	import { ClipboardIcon as ClipboardIconSolid } from '@heroicons/vue/24/solid'
 	import { ClipboardDocumentCheckIcon as ClipboardDocumentCheckIconSolid } from '@heroicons/vue/24/solid'
-	import { onUnmounted, ref } from 'vue'
+	import { onBeforeUnmount, ref } from 'vue'
 
 	const props = defineProps<{
 		promptContent: string
+	}>()
+
+	const emit = defineEmits<{
+		(e: 'copied-state-change', value: boolean): void
 	}>()
 
 	const copied = ref(false)
@@ -14,17 +18,23 @@
 		try {
 			await navigator.clipboard.writeText(props.promptContent)
 			copied.value = true
+			emit('copied-state-change', true)
 			if (timer) clearTimeout(timer)
 			timer = setTimeout(() => {
 				copied.value = false
+				emit('copied-state-change', false)
 			}, 2000)
 		} catch (e) {
 			console.error(e)
 		}
 	}
 
-	onUnmounted(() => {
+	onBeforeUnmount(() => {
 		if (timer) clearTimeout(timer)
+
+		if (copied.value) {
+			emit('copied-state-change', false)
+		}
 	})
 </script>
 
@@ -33,7 +43,6 @@
 		type="button"
 		:title="copied ? 'Copied' : 'Copy'"
 		:aria-label="copied ? 'Copied to clipboard' : 'Copy to clipboard'"
-		:disabled="copied"
 		@click="copy"
 		:class="{
 			'focus-visible:outline-success dark:focus-visible:outline-success cursor-default!': copied,
