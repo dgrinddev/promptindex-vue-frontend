@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { useAuthStore } from '@/stores/authStore'
 import { router } from '@/router'
-import { toast } from '@/services/toast'
+import { useToast } from 'vue-toast-notification'
 import { API_BASE_URL } from '@/config/env'
+
+const $toast = useToast()
 
 const axiosInstance = axios.create({
 	baseURL: API_BASE_URL,
@@ -30,26 +32,26 @@ axiosInstance.interceptors.response.use(
 					case 403:
 					case 419:
 						authStore.clearAuthState()
-						toast.error('Unauthorized')
+						$toast.error('Unauthorized')
 						router.push({ name: 'auth.login' })
 						break
 					case 404:
-						toast.error('Resource not found')
+						$toast.error('Resource not found')
 						router.push({ name: 'errors.not-found' })
 						break
 					case 500:
-						toast.error('Internal Server Error')
+						$toast.error('Internal Server Error')
 						router.push({ name: 'errors.internal-server-error' })
 						break
 				}
 			} else {
 				// Network error / timeout
-				toast.error('Network error — please try again')
+				$toast.error('Network error — please try again')
 			}
 		} else {
 			// Not an Axios error
 			console.error('HTTP / transport error:', error)
-			toast.error('Something went wrong while connecting. Please try again.')
+			$toast.error('Something went wrong while connecting. Please try again.')
 		}
 
 		return Promise.reject(error)

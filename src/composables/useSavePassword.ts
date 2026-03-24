@@ -1,4 +1,4 @@
-import { toast } from '@/services/toast'
+import { useToast } from 'vue-toast-notification'
 import { useErrorsStore } from '@/stores/errorsStore'
 import { ref } from 'vue'
 import axiosInstance from '@/services/axios'
@@ -7,6 +7,7 @@ import type { PasswordSettings } from '@/types/settings.types'
 import { useAuthStore } from '@/stores/authStore'
 
 export function useSavePassword() {
+	const $toast = useToast()
 	const errorsStore = useErrorsStore()
 	const authStore = useAuthStore()
 	
@@ -26,7 +27,7 @@ export function useSavePassword() {
 			if (handleLaravelValidationError(e)) return
 			// If unexpected API response:
 			console.error('Unexpected API response for savePassword:', e)
-			toast.error('Something went wrong. Please try again.')
+			$toast.error('Something went wrong. Please try again.')
 		} finally {
 			savePassword_isLoading.value = false
 		}

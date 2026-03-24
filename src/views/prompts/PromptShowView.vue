@@ -10,7 +10,7 @@
 
 	import { useRoute } from 'vue-router'
 	import { router } from '@/router'
-	import { toast } from '@/services/toast'
+	import { useToast } from 'vue-toast-notification'
 	import { useGetPrompt } from '@/composables/useGetPrompt'
 	import ImageUploadGallery from '@/components/inputs/ImageUploadGallery.vue'
 	import { watch, computed, type Component } from 'vue'
@@ -19,6 +19,7 @@
 	import { useDeleteResource } from '@/composables/useDeleteResource'
 
 	const route = useRoute()
+	const $toast = useToast()
 	const { getPrompt_isLoading, prompt, getPrompt } = useGetPrompt()
 
 	const {
@@ -50,10 +51,10 @@
 		const success = await deletePrompt(id)
 		if (!success) {
 			console.error('handleRemovePrompt - deleting prompt failed:', id)
-			toast.error('Failed to delete the prompt. Please reload the page.')
+			$toast.error('Failed to delete the prompt. Please reload the page.')
 			return
 		}
-		toast.success('Prompt deleted!')
+		$toast.success('Prompt deleted!')
 		router.push({ name: 'app.prompts.index' })
 	}
 

@@ -2,7 +2,7 @@
 	import { ref, useTemplateRef, watch } from 'vue'
 	import ImageUploadGallery from '@/components/inputs/ImageUploadGallery.vue'
 	import { useDeleteResource } from '@/composables/useDeleteResource'
-	import { toast } from '@/services/toast'
+	import { useToast } from 'vue-toast-notification'
 	import { API_BASE_URL, IS_DEV } from '@/config/env'
 
 	import vueFilePond from 'vue-filepond'
@@ -79,6 +79,7 @@
 		syncProcessingState()
 	})
 
+	const $toast = useToast()
 	const serverMessage = ref<string | null>(null)
 	const FilePond = vueFilePond( // Create FilePond component
 		FilePondPluginFileValidateType,
@@ -203,7 +204,7 @@
 
 		if (!success) {
 			console.error('FilePond revert - deleting image failed:', uniqueFileId)
-			toast.error('Failed to delete the image. Please reload the page.')
+			$toast.error('Failed to delete the image. Please reload the page.')
 			error('FilePond revert - deleting image failed')
 			return
 		}
@@ -259,7 +260,7 @@
 
 		if (!success) {
 			console.error('handleRemoveImage - deleting image failed:', imageId)
-			toast.error('Failed to delete the image. Please reload the page.')
+			$toast.error('Failed to delete the image. Please reload the page.')
 			return
 		}
 

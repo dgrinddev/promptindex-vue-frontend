@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 import axiosInstance from '@/services/axios'
 import { useErrorsStore } from '@/stores/errorsStore'
 import { router } from '@/router'
-import { toast } from '@/services/toast'
+import { useToast } from 'vue-toast-notification'
 import type { RegisterPayload, LoginPayload, AuthUser } from '@/types/auth.types'
 import type { ApiActionResponse, AuthLoginResponse, LaravelResourceResponse } from '@/types/api/responses.types'
 import { handleLaravelValidationError } from '@/services/handleLaravelValidationError'
@@ -11,6 +11,7 @@ import type { RouteLocationRaw } from 'vue-router'
 import axios from 'axios'
 
 export const useAuthStore = defineStore('auth', () => {
+    const $toast = useToast()
     const errorsStore = useErrorsStore()
     
     const user = ref<AuthUser | null>(null)
@@ -31,7 +32,7 @@ export const useAuthStore = defineStore('auth', () => {
         if (handleLaravelValidationError(e)) return
         // If unexpected API response:
         console.error('Unexpected API response for register:', e)
-        toast.error('Something went wrong. Please try again.')
+        $toast.error('Something went wrong. Please try again.')
       } finally {
         register_isLoading.value = false
       }
@@ -74,7 +75,7 @@ export const useAuthStore = defineStore('auth', () => {
         }
         // If unexpected API response:
         console.error('Unexpected API response for login:', e)
-        toast.error('Something went wrong. Please try again.')
+        $toast.error('Something went wrong. Please try again.')
       } finally {
         login_isLoading.value = false
       }
@@ -97,9 +98,9 @@ export const useAuthStore = defineStore('auth', () => {
         const message = options?.toastMessage ?? 'You signed out'
         const toastType = options?.toastType ?? 'success'
         if (message) {
-          if (toastType === 'success') toast.success(message)
-          if (toastType === 'info') toast.info(message)
-          if (toastType === 'error') toast.error(message)
+          if (toastType === 'success') $toast.success(message)
+          if (toastType === 'info') $toast.info(message)
+          if (toastType === 'error') $toast.error(message)
         }
         if (options?.redirectTo === null) return
         await router.push(options?.redirectTo ?? { name: 'guest.guest-pages.home' })

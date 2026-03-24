@@ -1,4 +1,4 @@
-import { toast } from '@/services/toast'
+import { useToast } from 'vue-toast-notification'
 import { useErrorsStore } from '@/stores/errorsStore'
 import { useAuthStore } from '@/stores/authStore'
 import { ref } from 'vue'
@@ -8,6 +8,7 @@ import { handleLaravelValidationError } from '@/services/handleLaravelValidation
 import type { ProfileSettings } from '@/types/settings.types'
 
 export function useSaveProfile() {
+	const $toast = useToast()
 	const errorsStore = useErrorsStore()
 	const authStore = useAuthStore()
 	
@@ -18,7 +19,7 @@ export function useSaveProfile() {
 		try {
 			await axiosInstance.put<void>(`/api/user/profile-information`, payload)
 			errorsStore.clear()
-			toast.success(`Profile updated!`)
+			$toast.success(`Profile updated!`)
 			authStore.getAuthUser()
 			router.push({ name: 'app.prompts.index' })
 		} catch (e) {
@@ -26,7 +27,7 @@ export function useSaveProfile() {
 			if (handleLaravelValidationError(e)) return
 			// If unexpected API response:
 			console.error('Unexpected API response for saveProfile:', e)
-			toast.error('Something went wrong. Please try again.')
+			$toast.error('Something went wrong. Please try again.')
 		} finally {
 			saveProfile_isLoading.value = false
 		}

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 	import { computed, inject, watch, ref, type Component } from 'vue'
 	import { useRoute } from 'vue-router'
-	import { toast } from '@/services/toast'
+	import { useToast } from 'vue-toast-notification'
 	import { router } from '@/router'
 	import PromptIndexCopyButton from '@/components/buttons/PromptIndexCopyButton.vue'
 	import { pageTitleSuffix_key } from '@/utils/injection-keys'
@@ -20,6 +20,7 @@
 	import { RectangleStackIcon as RectangleStackIconOutline } from '@heroicons/vue/24/outline'
 
 	const route = useRoute()
+	const $toast = useToast()
 	const { getAllPrompts_isLoading, paginatedResponse, prompts, getAllPrompts } = useGetAllPrompts()
 
 	const {
@@ -81,7 +82,7 @@
 		const success = await deletePrompt(id)
 		if (!success) {
 			console.error('handleRemovePrompt - deleting prompt failed:', id)
-			toast.error('Failed to delete the prompt. Please reload the page.')
+			$toast.error('Failed to delete the prompt. Please reload the page.')
 			return
 		}
 		if (!paginatedResponse.value) return
