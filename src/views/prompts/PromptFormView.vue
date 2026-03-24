@@ -118,7 +118,7 @@
 					<span v-else>
 						<span>Create your prompt below.</span>
 						<br>
-						<span><span class="font-bold text-white">IMPORTANT:</span> It will be published instantly and <span class="font-bold text-white">visible to everyone</span>.</span>
+						<span><span class="font-bold text-white">IMPORTANT:</span> It will be published instantly and be <span class="font-bold text-white">visible to everyone</span>.</span>
 					</span>
 				</h2>
 
