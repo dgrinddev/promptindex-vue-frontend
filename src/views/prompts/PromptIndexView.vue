@@ -84,6 +84,7 @@
 			toast.error('Failed to delete the prompt. Please reload the page.')
 			return
 		}
+		toast.success('Prompt deleted!')
 		if (!paginatedResponse.value) return
 		getAllPrompts(paginatedResponse.value.meta.current_page, props.context)
 	}
