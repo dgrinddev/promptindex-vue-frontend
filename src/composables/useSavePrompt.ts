@@ -25,7 +25,7 @@ export function useSavePrompt() {
 			router.push({ name: 'app.prompts.index' })
 		} catch (e) {
 			// Handle Laravel validation errors (HTTP 422)
-			if (handleLaravelValidationError(e)) return
+			if (handleLaravelValidationError(e, true)) return
 			// If unexpected API response:
 			console.error('Unexpected API response for savePrompt:', e)
 			toast.error('Something went wrong. Please try again.')
