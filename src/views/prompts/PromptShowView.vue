@@ -91,7 +91,7 @@
 				class="sm:items-center lg:justify-between pb-6"
 				:class="{
 					'lg:flex': props.context === 'app',
-					'flex-row': props.context === 'guest',
+					'flex': props.context === 'guest',
 				}"
 			>
 				<div class="min-w-0 flex-1">
