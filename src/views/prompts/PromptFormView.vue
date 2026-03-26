@@ -109,7 +109,7 @@
 
 	function handleSubmit(): void {
 		if (hasImageErrors.value) {
-			toast.error('Some images have errors')
+			toast.error('Please remove images with errors')
 			return
 		}
 		savePrompt(form.value, prompt_id.value)
