@@ -52,8 +52,8 @@
 	watch(paginatedResponse, (new_paginatedResponse) => {
 		if (!new_paginatedResponse) return
 		if (!new_paginatedResponse.meta.from && new_paginatedResponse.meta.current_page > 1) {
-			// if there is no items on the current page and we are not on the first page then go to the previous page
-			return redirectToPageNumber(new_paginatedResponse.meta.current_page - 1)
+			// if there is no items on the current page and we are not on the first page then go to the last page
+			return redirectToPageNumber(new_paginatedResponse.meta.last_page)
 		}
 
 		/*
