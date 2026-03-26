@@ -10,6 +10,7 @@
 	import { useGetPromptForEdit } from '@/composables/useGetPromptForEdit'
 	import { useSavePrompt } from '@/composables/useSavePrompt'
 	import { v4 as uuidv4 } from 'uuid'
+	import { toast } from '@/services/toast'
 	import type { PromptPayload } from '@/types/prompts/prompt.types'
 	import type { Image } from '@/types/prompts/image.types'
 	import { pageTitleSuffix_key } from '@/utils/injection-keys'
@@ -104,13 +105,22 @@
 	})
 
 	const isProcessingImages = ref(false)
+	const hasImageErrors = ref(false)
+
+	function handleSubmit(): void {
+		if (hasImageErrors.value) {
+			toast.error('Some images have errors')
+			return
+		}
+		savePrompt(form.value, prompt_id.value)
+	}
 </script>
 
 <template>
 	<div v-if="getPromptForEdit_isLoading">
 		<p class="mt-1 text-base text-gray-400">Loading...</p>
 	</div>
-	<form v-else @submit.prevent="savePrompt(form, prompt_id)">
+	<form v-else @submit.prevent="handleSubmit" novalidate>
 		<div class="space-y-12">
 			<div class="border-b border-white/10 pb-12">
 				<h2 class="mt-1 text-base text-gray-400">
@@ -184,6 +194,7 @@
 						v-model:images="images"
 						v-model:coverImageId="form.coverimage_id"
 						v-model:isProcessing="isProcessingImages"
+						v-model:hasErrors="hasImageErrors"
 						:prompt-id="prompt_id"
 						:upload-image-token="form.upload_image_token"
 						enable-radio

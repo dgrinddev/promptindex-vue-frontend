@@ -65,6 +65,7 @@
 	const images = defineModel<Image[]>('images', { required: true })
 	const coverImageId = defineModel<number | null>('coverImageId')
 	const isProcessing = defineModel<boolean>('isProcessing', { default: false })
+	const hasErrors = defineModel<boolean>('hasErrors', { default: false })
 
 	if (IS_DEV && props.enableRadio && coverImageId.value === undefined) {
 		throw new Error('ImageUploadInput: v-model:coverImageId is required when enableRadio is used.')
@@ -76,7 +77,7 @@
 	} = useDeleteResource('image')
 
 	watch(deleteImage_isLoading, () => {
-		syncProcessingState()
+		syncFilePondState()
 	})
 
 	const serverMessage = ref<string | null>(null)
@@ -216,17 +217,17 @@
 	// processfile - Called when FilePond finishes processing a file (both success and error cases).
 	// In this case I have used it for debugging to access the FilePond error object and its error code,
 	// which is not available in the `onerror` callback.
-	// Also used for syncProcessingState()
+	// Also used for syncFilePondState()
 	function handleProcessedFile(error: unknown, file: unknown): void {
 		if (error) {
 			console.warn('FilePond processfile error', { error, file })
 		}
-		syncProcessingState()
+		syncFilePondState()
 	}
 
 
-	// Determines if images are currently being processed (upload or delete) and updates `isProcessing` accordingly.
-	function syncProcessingState(): void {
+	// Determines if images are currently being processed (upload or delete) and whether any files have errors, then updates `isProcessing` and `hasErrors` accordingly.
+	function syncFilePondState(): void {
 		const files = pond.value?.getFiles() ?? []
 
 		const isUploading = files.some(file =>
@@ -235,8 +236,14 @@
 			|| file.status === FileStatus.PROCESSING
 			|| file.status === FileStatus.LOADING
 		)
-
 		isProcessing.value = isUploading || deleteImage_isLoading.value
+
+		const hasFileErrors = files.some(file =>
+			file.status === FileStatus.LOAD_ERROR
+			|| file.status === FileStatus.PROCESSING_ERROR
+			|| file.status === FileStatus.PROCESSING_REVERT_ERROR
+		)
+		hasErrors.value = hasFileErrors
 	}
 
 
@@ -316,11 +323,12 @@
 					},
 					revert: handleFilePondRevert,
 				}"
-				@addfile="syncProcessingState"
-				@processfilestart="syncProcessingState"
+				@addfile="syncFilePondState"
+				@processfilestart="syncFilePondState"
 				@processfile="handleProcessedFile"
-				@processfileabort="syncProcessingState"
-				@processfilerevert="syncProcessingState"
+				@processfileabort="syncFilePondState"
+				@processfilerevert="syncFilePondState"
+				@removefile="syncFilePondState"
 				:labelFileProcessingError="() => serverMessage ?? 'Upload failed'"
 				max-file-size="1024KB"
 			/>
