@@ -191,7 +191,7 @@
 		</main>
 
 		<footer id="footer" class="border-t border-outline dark:border-outline-dark">
-			<div id="footer-container" class="container mx-auto">
+			<div id="footer-container" class="container mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="py-6 flex flex-col md:flex-row justify-between items-center gap-x-4 gap-y-4">
 					<div class="flex flex-col items-center md:items-start order-last md:order-first">
 						<p class="font-light text-on-surface/50 dark:text-on-surface-dark/50 text-xs">
@@ -209,8 +209,8 @@
 							</a>
 						</p>
 					</div>
-					<div class="flex flex-col sm:flex-row flex-wrap items-center gap-x-2.5 md:gap-x-4 gap-y-3">
-						<ul class="flex gap-3 md:gap-5 order-last sm:order-first">
+					<div class="flex sm:flex-row flex-wrap items-center gap-x-2.5 md:gap-x-4 gap-y-3">
+						<ul class="flex gap-3 md:gap-5">
 							<li v-for="item in footer_2_1legal" :key="item.id">
 								<RouterLink
 									:to="item.to"
@@ -231,7 +231,7 @@
 								</RouterLink>
 							</li>
 						</ul>
-						<span class="h-4 w-px bg-outline dark:bg-outline-dark mx-1 hidden sm:block"></span>
+						<span class="h-4 w-px bg-outline dark:bg-outline-dark mx-1 block"></span>
 						<ul class="flex gap-3 md:gap-5">
 							<li>
 								<a
