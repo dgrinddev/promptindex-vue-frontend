@@ -83,11 +83,11 @@
                   </thead>
                   <tbody class="divide-y divide-white/10 bg-gray-800/60">
                     <tr>
-                      <td class="px-4 py-3 text-sm text-white">promptindex_session</td>
+                      <td class="px-4 py-3 text-sm text-white">__cf_bm</td>
                       <td class="px-4 py-3 text-sm">
-                        Maintains your session while you browse the website and use your account.
+                        This cookie, set by Cloudflare, is used to distinguish between humans and bots.
                       </td>
-                      <td class="px-4 py-3 text-sm">Session</td>
+                      <td class="px-4 py-3 text-sm">1 hour</td>
                       <td class="px-4 py-3 text-sm">
                         <span class="inline-flex rounded-full bg-emerald-500/10 px-2 py-1 text-xs font-medium text-emerald-300">
                           Strictly Necessary
@@ -100,7 +100,7 @@
                         Protects against cross-site request forgery (CSRF) attacks when forms and authenticated
                         actions are submitted.
                       </td>
-                      <td class="px-4 py-3 text-sm">Session</td>
+                      <td class="px-4 py-3 text-sm">2 hours</td>
                       <td class="px-4 py-3 text-sm">
                         <span class="inline-flex rounded-full bg-emerald-500/10 px-2 py-1 text-xs font-medium text-emerald-300">
                           Strictly Necessary
@@ -108,24 +108,11 @@
                       </td>
                     </tr>
                     <tr>
-                      <td class="px-4 py-3 text-sm text-white">Auth Token (varies)</td>
+                      <td class="px-4 py-3 text-sm text-white">promptindex-session</td>
                       <td class="px-4 py-3 text-sm">
-                        Remembers your authenticated state securely after login.
+                        Maintains your session while you browse the website and use your account.
                       </td>
-                      <td class="px-4 py-3 text-sm">Session</td>
-                      <td class="px-4 py-3 text-sm">
-                        <span class="inline-flex rounded-full bg-emerald-500/10 px-2 py-1 text-xs font-medium text-emerald-300">
-                          Strictly Necessary
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="px-4 py-3 text-sm text-white">_cfuvid</td>
-                      <td class="px-4 py-3 text-sm">
-                        Cloudflare security and session-affinity cookie used for traffic protection and reliable
-                        delivery.
-                      </td>
-                      <td class="px-4 py-3 text-sm">Session</td>
+                      <td class="px-4 py-3 text-sm">2 hours</td>
                       <td class="px-4 py-3 text-sm">
                         <span class="inline-flex rounded-full bg-emerald-500/10 px-2 py-1 text-xs font-medium text-emerald-300">
                           Strictly Necessary
