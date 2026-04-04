@@ -14,7 +14,7 @@ import type { StrictSubset } from '@/types/utility.types'
 export type ResourceIndexContext = StrictSubset<
   ApplicationSurface,
   | 'guest'
-  | 'guest-docs'
+//| 'guest-docs'
   | 'app'
 //| 'admin'
 >
@@ -23,7 +23,7 @@ export type ResourceIndexContext = StrictSubset<
 export type ResourceShowContext = StrictSubset<
   ApplicationSurface,
   | 'guest'
-  | 'guest-docs'
+//| 'guest-docs'
   | 'app'
 //| 'admin'
 >

@@ -14,7 +14,7 @@
 // Represents a top-level UI surface. Each value corresponds to one of the application's layouts.
 export type ApplicationSurface =
   | 'guest'
-  | 'guest-docs'
+//| 'guest-docs'
   | 'auth'
   | 'app'
   | 'errors'
