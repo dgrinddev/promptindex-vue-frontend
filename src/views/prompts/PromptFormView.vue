@@ -212,7 +212,6 @@
 			-->
 			<PrimaryButton
 				type="submit"
-				class="!py-2 !text-sm"
 				:disabled="isProcessingImages || savePrompt_isLoading"
 				:is-processing="savePrompt_isLoading"
 			>
