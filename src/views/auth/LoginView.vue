@@ -46,6 +46,7 @@
       class="w-full"
       id="submit_btn"
       :disabled="authStore.login_isLoading"
+      :is-processing="authStore.login_isLoading"
     >
       Sign in
     </PrimaryButton>

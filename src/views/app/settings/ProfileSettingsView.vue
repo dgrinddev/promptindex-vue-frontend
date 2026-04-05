@@ -62,6 +62,7 @@
 			class="w-full"
 			id="submit_btn"
 			:disabled="saveProfile_isLoading"
+			:is-processing="saveProfile_isLoading"
 		>
 			Save
 		</PrimaryButton>

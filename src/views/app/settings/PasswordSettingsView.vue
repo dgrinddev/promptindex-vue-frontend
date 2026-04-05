@@ -58,6 +58,7 @@
 			class="w-full"
 			id="submit_btn"
 			:disabled="savePassword_isLoading"
+			:is-processing="savePassword_isLoading"
 		>
 			Save
 		</PrimaryButton>

@@ -40,6 +40,7 @@
 			class="w-full bg-red-500 hover:bg-red-400 disabled:bg-red-400"
 			id="submit_btn"
 			:disabled="deleteUser_isLoading"
+			:is-processing="deleteUser_isLoading"
 		>
 			Delete my account
 		</PrimaryButton>

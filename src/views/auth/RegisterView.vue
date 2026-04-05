@@ -97,6 +97,7 @@
       class="w-full"
       id="submit_btn"
       :disabled="authStore.register_isLoading"
+      :is-processing="authStore.register_isLoading"
     >
       Create account
     </PrimaryButton>
