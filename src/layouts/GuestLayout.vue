@@ -238,6 +238,7 @@
 									href="https://www.facebook.com/"
 									rel="nofollow noopener"
 									target="_blank"
+									aria-label="Visit us on Facebook (opens in new tab)"
 									class="text-on-surface dark:text-on-surface-dark underline-offset-2 hover:text-on-surface-strong focus:outline-hidden focus:underline dark:hover:text-primary-dark transition"
 								>
 									<IconFacebook aria-hidden="true" class="w-4 h-4" />
