@@ -1,0 +1,13 @@
+User-agent: *
+
+# Allow all public-facing pages
+Allow: /
+
+# Block private user areas
+Disallow: /app/
+
+# Block auth pages
+Disallow: /auth/
+
+# Sitemap reference
+Sitemap: https://promptindex.io/sitemap.xml
