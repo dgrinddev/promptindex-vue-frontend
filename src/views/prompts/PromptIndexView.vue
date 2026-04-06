@@ -148,6 +148,7 @@
 									<h3
 										class="text-xl font-bold text-on-surface-strong lg:text-2xl dark:text-on-surface-dark-strong truncate"
 										:aria-describedby="`prompt-${prompt.id}-articleDescription`"
+										:title="prompt.title"
 									>
 										{{ prompt.title }}
 									</h3>
