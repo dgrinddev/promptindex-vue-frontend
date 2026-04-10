@@ -1,48 +1,76 @@
-# promptindex-vue-frontend
+# PromptIndex — Vue Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+> Frontend for [PromptIndex](https://promptindex.io/), a community-driven platform to discover and share AI prompts for ChatGPT, Midjourney, Claude, and more.
 
-## Recommended IDE Setup
+This repository contains the Vue SPA. The backend (Laravel API) lives in a [separate repository](https://github.com/dgrinddev/promptindex-laravel-backend).
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Recommended Browser Setup
+## Tech stack
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- **Vue.js** (Composition API)
+- **TypeScript**
+- **Tailwind CSS**
 
-## Type Support for `.vue` Imports in TS
+Hosted on **Hostinger**.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+---
 
-## Customize configuration
+## Architecture
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+The frontend is intentionally decoupled from the backend — each lives in its own repository and is deployed independently. Authentication is handled via **Laravel Sanctum** with cookie-based sessions and CSRF protection. All HTTP errors are handled centrally through an `axiosInstance` configured with interceptors.
 
-## Project Setup
+### ApplicationSurface
 
-```sh
-npm install
-```
+Vue Router uses an `ApplicationSurface` context (`'guest' | 'auth' | 'app' | 'errors'`) to protect routes and control layout. A central route guard enforces auth-required pages, and a `useGetNavItemsFromRoutes` composable builds the navigation structure dynamically from route meta — nothing is hardcoded in layouts.
 
-### Compile and Hot-Reload for Development
+### Views & components
 
-```sh
-npm run dev
-```
+| File | Purpose |
+|---|---|
+| `PromptFormView.vue` | Shared create/edit form (avoids duplicated form code) |
+| `PromptIndexView.vue` | Listing of prompts — adapts to guest/app context |
+| `PromptShowView.vue` | Detailed view of a single prompt — adapts to guest/app context |
 
-### Type-Check, Compile and Minify for Production
+Reusable input components (`CheckboxInput.vue`, `ImageUploadGallery.vue`, `RadioInput.vue`, `SelectInput.vue`, `StringInput.vue`, `TextareaInput.vue`) all integrate with a central Pinia errors store (`errorsStore.ts`) for displaying validation errors from the API. Authentication state is managed in `authStore.ts`.
 
-```sh
-npm run build
-```
+### Composables
 
-### Lint with [ESLint](https://eslint.org/)
+All data fetching and mutations are isolated in composables, keeping views free of business logic. Some examples:
 
-```sh
-npm run lint
-```
+- `useGetAllPrompts.ts`
+- `useGetPrompt.ts`
+- `useSavePrompt.ts`
+- `useDeleteResource.ts`
+
+### TypeScript
+
+TypeScript is used consistently throughout the project, including views, components, composables, stores, router meta, injection keys, environment configuration, etc. Everything received from the backend is typed via interfaces (`GetPrompt`, `LaravelPaginatedResponse<T>`, `ApiActionResponse`, etc.).
+
+The `src/types/` directory is structured with a layered type hierarchy under `src/types/ui/`, containing primitive UI types, input types, and component props — modelled on what a larger project or UI component library would require. Generics are used in several places, including `RadioInput.vue` and `LaravelPaginatedResponse<T>`, and utility types like `StrictSubset` are used to constrain type unions.
+
+### Image uploads
+
+Image uploading uses **FilePond** via `ImageUploadInput.vue`. Images can be uploaded before a prompt is saved — this is handled by generating an `upload_image_token` (UUID) in the frontend, which is sent with each upload request. When the prompt is saved, the backend associates the uploaded images with the new prompt using this token.
+
+After uploading, `ImageUploadGallery.vue` allows the user to select one image as the cover.
+
+---
+
+## Features
+
+**All visitors** can browse the public prompt library and copy any prompt with a single click — no account needed.
+
+**Registered users** can additionally:
+
+- Create and publish prompts with a title, type (`text | image | other`), optional category, and content
+- Upload images and select a cover image
+- Edit and delete their own prompts
+- View all their prompts in a private dashboard
+
+---
+
+## Related
+
+- [Backend repository (Laravel API)](https://github.com/dgrinddev/promptindex-laravel-backend)
+- [Live site](https://promptindex.io/)
