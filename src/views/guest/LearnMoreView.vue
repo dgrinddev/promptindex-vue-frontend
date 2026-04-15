@@ -42,7 +42,7 @@
               </li>
               <li class="flex gap-x-3">
                 <MagnifyingGlassCircleIconSolid class="mt-1 size-5 flex-none text-indigo-400" aria-hidden="true" />
-                <span><strong class="font-semibold text-white">Explore the prompt library.</strong> Discover prompts for ChatGPT, Midjourney, Claude and more — all in one place.</span>
+                <span><strong class="font-semibold text-white">Explore the prompt library.</strong> Discover prompts for ChatGPT, Midjourney, Claude and more, all in one place.</span>
               </li>
               <li class="flex gap-x-3">
                 <ClipboardDocumentCheckIconSolid class="mt-1 size-5 flex-none text-indigo-400" aria-hidden="true" />
@@ -58,15 +58,15 @@
               </div>
               <div>
                 <dt class="font-semibold text-white">Is everything I create on {{ APP_NAME }} public?</dt>
-                <dd class="mt-1">{{ APP_NAME }} is built around sharing — that's the whole point. Everything you create on {{ APP_NAME }} is public and visible to everyone. This includes the prompt itself, any images you upload to it, and your username. The only things that stay private are your email address and password — those are never exposed to anyone.</dd>
+                <dd class="mt-1">{{ APP_NAME }} is built around sharing, that's the whole point. Everything you create on {{ APP_NAME }} is public and visible to everyone. This includes the prompt itself, any images you upload to it, and your username. The only things that stay private are your email address and password, those are never exposed to anyone.</dd>
               </div>
               <div>
                 <dt class="font-semibold text-white">Which AI tools are supported?</dt>
-                <dd class="mt-1">{{ APP_NAME }} is tool-agnostic. Any AI tool that uses prompts is supported — including ChatGPT, Claude, Midjourney, DALL-E, Stable Diffusion and more, whether you're generating text, images or anything else.</dd>
+                <dd class="mt-1">{{ APP_NAME }} is tool-agnostic. Any AI tool that uses prompts is supported, including ChatGPT, Claude, Midjourney, DALL-E, Stable Diffusion and more, whether you're generating text, images or anything else.</dd>
               </div>
               <div>
                 <dt class="font-semibold text-white">Can I control what happens to my prompts after adding them?</dt>
-                <dd class="mt-1">You can edit or delete any prompt you have added at any time from your prompt dashboard. However, keep in mind that once a prompt is added, anyone can copy and do whatever they like with it — including republishing it (or any modified versions of it) on {{ APP_NAME }} or elsewhere. Once a prompt has been seen, it is potentially out there forever. By adding a prompt to {{ APP_NAME }}, you effectively give up all ownership and control of it.</dd>
+                <dd class="mt-1">You can edit or delete any prompt you have added at any time from your prompt dashboard. However, keep in mind that once a prompt is added, anyone can copy and do whatever they like with it, including republishing it (or any modified versions of it) on {{ APP_NAME }} or elsewhere. Once a prompt has been seen, it is potentially out there forever. By adding a prompt to {{ APP_NAME }}, you effectively give up all ownership and control of it.</dd>
               </div>
             </dl>
           </div>

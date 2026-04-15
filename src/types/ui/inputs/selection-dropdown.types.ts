@@ -12,7 +12,7 @@ import type { BaseInputOption } from '@/types/ui/inputs/input-base.types'
 
 // Internal base type for options in dropdown-based selection inputs
 // Adds nothing new now but allows adding dropdown-specific stuff later.
-// Extend this — not meant for direct use in features.
+// Extend this, not meant for direct use in features.
 type BaseDropdownSelectionOption<TValue = string | number | null> =
 	BaseInputOption<TValue>
 
@@ -35,7 +35,7 @@ export interface SelectOptionWithImageAndDescription<TValue = string | number | 
 
 // Internal base props for dropdown-based selection inputs
 // Adds nothing new now but allows adding dropdown-specific stuff later.
-// Extend this — not meant for direct use in features.
+// Extend this, not meant for direct use in features.
 type BaseDropdownSelectionProps =
 	BaseInputProps
 

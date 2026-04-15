@@ -4,7 +4,7 @@
  * Contains common input-related interfaces used by
  * text inputs, selects, radios, ratings, textarea, fileupload, checkbox, etc.
  *
- * Extend these — not meant for direct use in features.
+ * Extend these, not meant for direct use in features.
  */
 
 //import type { InputState } from '@/types/ui/ui-primitives.types'

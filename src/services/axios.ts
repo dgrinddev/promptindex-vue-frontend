@@ -44,7 +44,7 @@ axiosInstance.interceptors.response.use(
 				}
 			} else {
 				// Network error / timeout
-				toast.error('Network error — please try again')
+				toast.error('Network error! Please try again')
 			}
 		} else {
 			// Not an Axios error

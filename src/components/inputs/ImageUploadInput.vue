@@ -89,7 +89,7 @@
 	const pond = useTemplateRef<VueFilePondInstanceMethods>('pond')
 
 
-	// ondata — modify formData before upload
+	// ondata - modify formData before upload
 	// Adds prompt_id and upload_image_token to the upload request when available.
 	function handleFilePondData(formData: FormData): FormData {
 		if (props.promptId !== null) {
@@ -104,7 +104,7 @@
 	}
 
 
-	// onload — handle successful upload
+	// onload - handle successful upload
 	// Parses API response and appends the uploaded image to local state
 	function handleFilePondLoad(response: string): number {
 		let parsed: ApiActionResponseWithData<Image>
@@ -129,7 +129,7 @@
 	}
 
 
-	// onerror — handle failed upload
+	// onerror - handle failed upload
 	// Handles Laravel validation errors and generic API errors
 	function handleFilePondError(response: string): void {
 		let errorData: unknown
@@ -171,7 +171,7 @@
 	}
 
 
-	// local state helper — remove image from component state
+	// local state helper - remove image from component state
 	// Keeps `images` and `coverImageId` consistent after deletion.
 	function removeImageFromLocalState(imageId: number): void {
 		images.value = images.value.filter(
@@ -184,7 +184,7 @@
 	}
 
 
-	// revert — handle deletion triggered from FilePond UI
+	// revert - handle deletion triggered from FilePond UI
 	// Deletes the image via the API and keeps local state in sync
 	async function handleFilePondRevert(
 		uniqueFileId: string | number,
@@ -247,7 +247,7 @@
 	}
 
 
-	// remove-image - Triggered when clicking the delete button on an image in ImageUploadGallery.
+	// remove-image - triggered when clicking the delete button on an image in ImageUploadGallery.
 	async function handleRemoveImage(imageId: number): Promise<void> {
 		const file = pond.value
 			?.getFiles()
@@ -274,7 +274,7 @@
 	}
 
 
-	// helper — read XSRF token from cookies
+	// helper - read XSRF token from cookies
 	// Used by FilePond to authenticate upload requests against Laravel Sanctum.
 	function getXsrfTokenFromCookie(): string | null {
 		const cookieString = document.cookie.trim()

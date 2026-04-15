@@ -11,7 +11,7 @@ import type { RouteLocationRaw } from 'vue-router'
  * Example (deep nesting): `AppLayout:navigationSidebar:3-userMenu.1-adminItems.2-dangerZone.1`
  *
  * # STRUCTURE RULES FOR PLACEMENT-ID FORMAT
- * 1. `<LAYOUTFILE>`: The Vue layout component name (e.g. `GuestLayout`, `AppLayout`). Describes where the navigation is rendered — NOT where it routes to.
+ * 1. `<LAYOUTFILE>`: The Vue layout component name (e.g. `GuestLayout`, `AppLayout`). Describes where the navigation is rendered, NOT where it routes to.
  * 2. `<AREA>`: Structural UI region within the layout (e.g. `mainNav`, `footer`, `navigationSidebar`, `topbar`) - must be camelCase.
  * 3. SECTION (`<number>[-<camelCaseDescription>]`) / SUBSECTION (`[.<number>[-<camelCaseDescription>]]*`):
  * 3.1 Every structural level follows the pattern `<number>[-<camelCaseDescription>]`.

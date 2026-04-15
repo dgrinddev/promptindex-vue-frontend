@@ -12,7 +12,7 @@
 /*
 
 // Internal base props for text-multiline inputs
-// Extend this — not meant for direct use in features.
+// Extend this, not meant for direct use in features.
 interface BaseTextMultilineProps
 	extends BaseInputProps {
 		rows?: number

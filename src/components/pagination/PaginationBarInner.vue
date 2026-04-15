@@ -33,7 +33,7 @@
 	const isTextMode = computed(() => props.navButtons === 'text')
 	const showNavButtons = computed(() => props.navButtons === 'icon' || props.navButtons === 'iconText')
 
-	// In text mode, 'pages' center makes no visual sense — fall back to 'simple'
+	// In text mode, 'pages' center makes no visual sense, fall back to 'simple'
 	const effectiveCenter = computed<PaginationCenterMode>(() => {
 		if (isTextMode.value && props.center === 'pages') return 'simple'
 		return props.center

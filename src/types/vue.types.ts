@@ -4,7 +4,7 @@
  * This file contains TypeScript types that mirror Vue's
  * internal runtime behavior but are NOT exported by Vue.
  *
- * These are framework-level compatibility types —
+ * These are framework-level compatibility types,
  * not component API types, UI models, or domain structures.
  */
 

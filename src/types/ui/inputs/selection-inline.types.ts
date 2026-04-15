@@ -13,7 +13,7 @@ import type { BaseInputOption } from '@/types/ui/inputs/input-base.types'
 // =================================================================
 
 // Internal base type for options in inline selection inputs
-// Extend this — not meant for direct use in features.
+// Extend this, not meant for direct use in features.
 interface BaseInlineSelectionOption<TValue = string | number>
   extends BaseInputOption<TValue> {
     highlight?: boolean
@@ -38,7 +38,7 @@ export interface CardRadioOption<TValue = string | number>
 
 // Internal base props for inline selection inputs
 // Adds nothing new now but allows adding radio-specific stuff later.
-// Extend this — not meant for direct use in features.
+// Extend this, not meant for direct use in features.
 type BaseInlineSelectionProps =
 	BaseInputProps
 

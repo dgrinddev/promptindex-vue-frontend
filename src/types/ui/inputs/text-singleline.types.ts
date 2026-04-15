@@ -21,7 +21,7 @@ export type TextSinglelineInputTypes =
 /*
 
 // Internal base props for text-singleline inputs
-// Extend this — not meant for direct use in features.
+// Extend this, not meant for direct use in features.
 interface BaseTextSinglelineProps
 	extends BaseInputProps {
 		placeholder?: string

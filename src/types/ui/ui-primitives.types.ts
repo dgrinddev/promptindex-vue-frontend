@@ -2,7 +2,7 @@
  * Internal global UI primitive types.
  * Shared across all UI layers.
  *
- * Extend these — not meant for direct use in features.
+ * Extend these, not meant for direct use in features.
  */
 
 /*

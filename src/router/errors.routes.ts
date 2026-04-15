@@ -9,7 +9,7 @@ export const errorsRoutes: RouteRecordRaw[] = [
 		component: ServerErrorView,
 	},
 	{
-		// Catch-all route — must remain the last registered route
+		// Catch-all route, must remain the last registered route
 		path: ':pathMatch(.*)*',
 		name: 'errors.not-found',
 		component: NotFoundView,
