@@ -10,6 +10,8 @@
 	import { useRoute } from 'vue-router'
 	import { useGetPromptForEdit } from '@/composables/useGetPromptForEdit'
 	import { useSavePrompt } from '@/composables/useSavePrompt'
+	import { useAuthStore } from '@/stores/authStore'
+	import { USER_TEST_NAME } from '@/config/env'
 	import { v4 as uuidv4 } from 'uuid'
 	import { toast } from '@/services/toast'
 	import type { PromptPayload } from '@/types/prompts/prompt.types'
@@ -19,6 +21,7 @@
 
 	const route = useRoute()
 	const errorsStore = useErrorsStore()
+	const authStore = useAuthStore()
 	const { getPromptForEdit_isLoading, prompt, getPromptForEdit } = useGetPromptForEdit()
 	const { savePrompt_isLoading, savePrompt } = useSavePrompt()
 
@@ -107,6 +110,7 @@
 
 	const isProcessingImages = ref(false)
 	const hasImageErrors = ref(false)
+	const isTestUser = computed(() => authStore.user?.name === USER_TEST_NAME)
 
 	function handleSubmit(): void {
 		if (hasImageErrors.value) {
@@ -130,6 +134,12 @@
 						<span>Create your prompt below.</span>
 						<br>
 						<span><span class="font-bold text-white">IMPORTANT:</span> It will be published instantly and be <span class="font-bold text-white">visible to everyone</span>.</span>
+						<span
+							v-if="isTestUser"
+							class="block text-danger mt-2.5"
+						>
+							Test account note: prompts are automatically cleaned up after a short period.
+						</span>
 					</span>
 				</h2>
 

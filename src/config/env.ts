@@ -69,6 +69,14 @@ export const APP_NAME: string = required(
   import.meta.env.VITE_APP_NAME
 )
 
+/**
+ * Shared demo/test username used for UI behavior.
+ */
+export const USER_TEST_NAME: string = required(
+  'VITE_USER_TEST_NAME',
+  import.meta.env.VITE_USER_TEST_NAME
+)
+
 // =================================================================
 // Optional
 // =================================================================
