@@ -138,7 +138,7 @@
 							v-if="isTestUser"
 							class="block text-danger mt-2.5"
 						>
-							Test account note: prompts are automatically cleaned up after a short period.
+							Note: This is a test account. Prompt data may be cleaned up automatically.
 						</span>
 					</span>
 				</h2>
