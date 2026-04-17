@@ -250,5 +250,5 @@
 			@page-change="redirectToPageNumber"
 		/>
 	</template>
-	<p v-else class="text-sm text-on-surface dark:text-on-surface-dark text-pretty">No result!</p>
+	<p v-else class="text-sm text-on-surface dark:text-on-surface-dark text-pretty">You haven't created any prompts yet. Click "Create Prompt" in the sidebar to get started.</p>
 </template>
