@@ -29,7 +29,7 @@
       id="name"
       name="name"
       v-model="data.name"
-      label="Username (lowercase letters, numbers, underscores)"
+      label="Username (only lowercase letters, numbers, underscores)"
       type="text"
       autofocus
       required
